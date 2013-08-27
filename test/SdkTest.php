@@ -1,6 +1,5 @@
 <?php
 require __DIR__ . '/../src/Wechat.php';
-require __DIR__ . '/ExitTestHelper.php';
 
 class WechatSdkTest extends PHPUnit_Framework_TestCase {
   protected $token;
@@ -16,18 +15,19 @@ class WechatSdkTest extends PHPUnit_Framework_TestCase {
   }
 
   public function testApiValidation() {
-    ExitTestHelper::init();
     $echostr = '9eabb7918cbad53305f7eae647cf1402e2fc7836';
     $_GET['echostr'] = $echostr;
+    $this->expectOutputString($echostr);
+
     $wechat = new Wechat($this->token);
-    $this->assertEquals($echostr, ExitTestHelper::getFirstExitOutput(), 'ApiValidation Fail.');
-    ExitTestHelper::clean();
+    $this->assertTrue($wechat->isApiValidation());
   }
 
   public function testEmptyPOST() {
-    $wechat = new Wechat($this->token);
-    $this->assertFalse($wechat->isValid());
     $this->expectOutputString('');
+
+    $wechat = new Wechat($this->token);
+    $this->assertFalse($wechat->isValid());    
   }
 
 }

@@ -41,7 +41,7 @@
         if ($this->isApiValidation()) {
 
           // 处理接入验证
-          exit($_GET['echostr']);
+          echo $_GET['echostr'];
 
         } else {
 
@@ -94,7 +94,7 @@
       }
 
       // 对应的参数不存在
-      return NULL;
+      return FALSE;
     }
 
     /**
@@ -193,7 +193,7 @@
               break;
           }
           // 发送回复，停止脚本执行
-          exit($response);
+          echo $response;
 
         } catch (Exception $ex) {
           $this->sendError($ex);
@@ -206,7 +206,7 @@
      *
      * @return boolean
      */
-    private function isApiValidation() {
+    public function isApiValidation() {
       return isset($_GET['echostr']);
     }
 
@@ -250,7 +250,7 @@
 ERR;
           $content = sprintf($template, $ex->getMessage(), $ex->getFile(), $ex->getLine());
         }
-        exit(new WechatTextResponse($this->getRequest('fromusername'), $this->getRequest('tousername'), $content));
+        echo new WechatTextResponse($this->getRequest('fromusername'), $this->getRequest('tousername'), $content);
       }
     }
 
