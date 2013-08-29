@@ -2,7 +2,10 @@
 /**
  * 微信公众平台 PHP SDK
  *
- * @author Ian Li <i@techotaku.net>
+ * @author     Ian Li <i@techotaku.net>
+ * @copyright  Ian Li <i@techotaku.net>, All rights reserved.
+ * @link       https://github.com/techotaku/Wechat-SDK.php
+ * @license    MIT License
  */
 
   /**
@@ -182,7 +185,7 @@
               break;
 
             case WechatResponse::music:
-              $response = new WechatMusicResponse($this->getRequest('fromusername'), $this->getRequest('tousername'), $params['title'], $params['description'], $params['musicUrl'], $params['hqMusicUrl']);
+              $response = new WechatMusicResponse($this->getRequest('fromusername'), $this->getRequest('tousername'), $params['title'], $params['description'], $params['musicurl'], $params['hqmusicurl']);
               break;
 
             case WechatResponse::text:
