@@ -1,20 +1,24 @@
 # 微信公众平台SDK
 
-[![Latest Stable Version](https://poser.pugx.org/techotaku/wechat-sdk/v/stable.png)](https://packagist.org/packages/techotaku/wechat-sdk) [![Total Downloads](https://poser.pugx.org/techotaku/wechat-sdk/downloads.png)](https://packagist.org/packages/techotaku/wechat-sdk)
-[![Latest Unstable Version](https://poser.pugx.org/techotaku/wechat-sdk/v/unstable.png)](https://packagist.org/packages/techotaku/wechat-sdk) [![Build Status](https://travis-ci.org/techotaku/Wechat-SDK.php.png?branch=master)](https://travis-ci.org/techotaku/Wechat-SDK.php)
+[![Latest Stable Version](https://poser.pugx.org/techotaku/wechat-sdk/v/stable.png)](https://packagist.org/packages/techotaku/wechat-sdk) [![Total Downloads](https://poser.pugx.org/techotaku/wechat-sdk/downloads.png)](https://packagist.org/packages/techotaku/wechat-sdk) [![Build Status](https://travis-ci.org/techotaku/Wechat-SDK.php.png?branch=master)](https://travis-ci.org/techotaku/Wechat-SDK.php)
 
 ## Overview
 PHP版本的微信公众平台SDK。可以很方便地解析请求、发送回复。
 
 ## Installation
+#### Composer
 把下面的配置代码加入你的`composer.json`的`require`段。
 ```json
 "techotaku/wechat-sdk": ">=1.0.0"
 ```
-然后使用Composer来安装SDK。
+然后使用[Composer](http://getcomposer.org/)来安装SDK。
 ```bash
 composer install
 ```
+如果[Packagist](https://packagist.org)故障或者不可用导致使用[Composer](http://getcomposer.org/)无法安装SDK的，可以使用[Satis](https://github.com/composer/satis "Satis - Package Repository Generator")来进行本地安装。
+
+#### Manually
+复制src/Wechat.php到任意位置，然后`require`或者`require_once`。
 
 ## Usage
 #### Autoload
