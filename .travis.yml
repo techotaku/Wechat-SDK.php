@@ -5,4 +5,11 @@ php:
   - 5.4
   - 5.5
 
-script: phpunit --coverage-text
+before_script:
+  - curl -s http://getcomposer.org/installer | php
+  - php composer.phar install --dev --no-interaction
+
+script: phpunit --coverage-clover build/logs/clover.xml
+
+after_script:
+  - php vendor/bin/coveralls -v
