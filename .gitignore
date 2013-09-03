@@ -27,3 +27,12 @@ $RECYCLE.BIN/
 # Web Storm
 *.idea
 .idea
+
+# PHP prj
+build/
+
+# composer
+vendor/
+composer.lock
+
+.coveralls.yml
