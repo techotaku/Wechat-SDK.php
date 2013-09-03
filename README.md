@@ -1,6 +1,6 @@
 # 微信公众平台SDK
 
-[![Latest Stable Version](https://poser.pugx.org/techotaku/wechat-sdk/v/stable.png)](https://packagist.org/packages/techotaku/wechat-sdk) [![Total Downloads](https://poser.pugx.org/techotaku/wechat-sdk/downloads.png)](https://packagist.org/packages/techotaku/wechat-sdk) [![Build Status](https://travis-ci.org/techotaku/Wechat-SDK.php.png?branch=master)](https://travis-ci.org/techotaku/Wechat-SDK.php)
+[![Latest Stable Version](https://poser.pugx.org/techotaku/wechat-sdk/v/stable.png)](https://packagist.org/packages/techotaku/wechat-sdk) [![Total Downloads](https://poser.pugx.org/techotaku/wechat-sdk/downloads.png)](https://packagist.org/packages/techotaku/wechat-sdk) [![Build Status](https://travis-ci.org/techotaku/Wechat-SDK.php.png?branch=master)](https://travis-ci.org/techotaku/Wechat-SDK.php) [![Coverage Status](https://coveralls.io/repos/techotaku/Wechat-SDK.php/badge.png?branch=master)](https://coveralls.io/r/techotaku/Wechat-SDK.php?branch=master)
 
 ## Overview
 PHP版本的微信公众平台SDK。可以很方便地解析请求、发送回复。
@@ -9,13 +9,13 @@ PHP版本的微信公众平台SDK。可以很方便地解析请求、发送回�
 #### Composer
 把下面的配置代码加入你的`composer.json`的`require`段。
 ```json
-"techotaku/wechat-sdk": ">=1.0.0"
+"techotaku/wechat-sdk": ">=1.0.1"
 ```
-然后使用[Composer](http://getcomposer.org/)来安装SDK。
+然后使用[Composer](https://getcomposer.org/)来安装SDK。
 ```bash
 composer install
 ```
-如果[Packagist](https://packagist.org)故障或者不可用导致使用[Composer](http://getcomposer.org/)无法安装SDK的，可以使用[Satis](https://github.com/composer/satis "Satis - Package Repository Generator")来进行本地安装。
+如果[Packagist](https://packagist.org)故障或者不可用导致无法安装SDK的，可以使用[Satis](https://github.com/composer/satis "Satis - Package Repository Generator")或者Artifact来进行本地安装，详见Composer文档中的[Repositories](https://getcomposer.org/doc/05-repositories.md#hosting-your-own)。
 
 #### Manually
 复制src/Wechat.php到任意位置，然后`require`或者`require_once`。
@@ -32,7 +32,7 @@ SDK位于全局命名空间下。
 实例化`Wechat`即可完成初始化。
 ```php
 define('TOKEN', ''); // 微信通信令牌，在公众平台管理后台设置
-define('DEBUG', ''); // 调试模式开关，指示是否将错误信息通过文本消息回复（如果可能）。
+define('DEBUG', TRUE); // 调试模式开关，指示是否将错误信息通过文本消息回复（如果可能）。
 $wechat = new \Wechat(TOKEN, DEBUG);
 ```
 初始化之后SDK将尝试从`$_GET[]`和`$GLOBALS['HTTP_RAW_POST_DATA']`中读取信息解析请求并进行初步处理。
