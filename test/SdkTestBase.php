@@ -13,7 +13,8 @@
   /**
    * Test Base
    */
-  class WechatSdkTestBase extends PHPUnit_Framework_TestCase {
+  class WechatSdkTestBase extends PHPUnit_Framework_TestCase
+  {
     protected $token;
     protected $signature;
     protected $toUser;
@@ -21,7 +22,8 @@
     protected $time;
     protected $msgid;
 
-    protected function setUp() {
+    protected function setUp()
+    {
       $this->token = 'Wechat-SDK.php';
 
       $_GET['timestamp'] = time();
@@ -38,10 +40,11 @@
       $this->msgid = '1234567890123456';
     }
 
-    protected function fillTextMsg($param) {
+    protected function fillTextMsg($param)
+    {
       $GLOBALS['HTTP_RAW_POST_DATA'] = "<xml>
   <ToUserName><![CDATA[$this->toUser]]></ToUserName>
-  <FromUserName><![CDATA[$this->fromUser]]></FromUserName> 
+  <FromUserName><![CDATA[$this->fromUser]]></FromUserName>
   <CreateTime>$this->time</CreateTime>
   <MsgType><![CDATA[text]]></MsgType>
   <Content><![CDATA[$param]]></Content>
@@ -49,10 +52,11 @@
 </xml>";
     }
 
-    protected function fillImageMsg($param) {
+    protected function fillImageMsg($param)
+    {
       $GLOBALS['HTTP_RAW_POST_DATA'] = "<xml>
   <ToUserName><![CDATA[$this->toUser]]></ToUserName>
-  <FromUserName><![CDATA[$this->fromUser]]></FromUserName> 
+  <FromUserName><![CDATA[$this->fromUser]]></FromUserName>
   <CreateTime>$this->time</CreateTime>
   <MsgType><![CDATA[image]]></MsgType>
   <PicUrl><![CDATA[$param]]></PicUrl>
@@ -60,7 +64,8 @@
 </xml>";
     }
 
-    protected function fillLocationMsg($x, $y) {
+    protected function fillLocationMsg($x, $y)
+    {
       $GLOBALS['HTTP_RAW_POST_DATA'] = "<xml>
   <ToUserName><![CDATA[$this->toUser]]></ToUserName>
   <FromUserName><![CDATA[$this->fromUser]]></FromUserName>
@@ -74,7 +79,8 @@
 </xml>";
     }
 
-    protected function fillLinkMsg($title, $description, $url) {
+    protected function fillLinkMsg($title, $description, $url)
+    {
       $GLOBALS['HTTP_RAW_POST_DATA'] = "<xml>
   <ToUserName><![CDATA[$this->toUser]]></ToUserName>
   <FromUserName><![CDATA[$this->fromUser]]></FromUserName>
@@ -87,7 +93,8 @@
 </xml>";
     }
 
-    protected function fillUnknown($param) {
+    protected function fillUnknown($param)
+    {
       $GLOBALS['HTTP_RAW_POST_DATA'] = "<xml>
   <ToUserName><![CDATA[$this->toUser]]></ToUserName>
   <FromUserName><![CDATA[$this->fromUser]]></FromUserName>
@@ -98,7 +105,8 @@
 </xml>";
     }
 
-    protected function fillEvent($event, $eventKey = '') {
+    protected function fillEvent($event, $eventKey = '')
+    {
       $GLOBALS['HTTP_RAW_POST_DATA'] = "<xml>
   <ToUserName><![CDATA[$this->toUser]]></ToUserName>
   <FromUserName><![CDATA[$this->fromUser]]></FromUserName>
@@ -111,4 +119,3 @@
     }
 
   }
-?>

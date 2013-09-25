@@ -11,8 +11,8 @@
   /**
    * 微信公众平台处理类
    */
-  class Wechat {
-
+  class Wechat
+  {
     /**
      * 调试模式，将内部错误通过文本消息回复显示
      *
@@ -33,7 +33,8 @@
      *
      * @param string $token 令牌
      */
-    public function __construct($token, $debug = FALSE) {
+    public function __construct($token, $debug = FALSE)
+    {
       $this->debug = $debug;
       $this->request = NULL;
 
@@ -73,7 +74,8 @@
      *
      * @return boolean
      */
-    public function isValid() {
+    public function isValid()
+    {
       // 确保请求非空，确保fromusername、tousername存在（确保sendError不会引用到空数据）
       return !is_null($this->request) && isset($this->request['fromusername']) && isset($this->request['tousername']);
     }
@@ -84,8 +86,8 @@
      * @param  string $param 参数名，默认为无参
      * @return mixed
      */
-    public function getRequest($param = FALSE) {
-
+    public function getRequest($param = FALSE)
+    {
       if ($param === FALSE) {
         return $this->request;
       }
@@ -106,7 +108,8 @@
      *
      * @return string 代表消息类型的常量字符串，在类WechatRequest中定义。
      */
-    public function getRequestType() {
+    public function getRequestType()
+    {
       if ($this->isValid()) {
         //请求有效，继续分析类型
         try {
@@ -160,8 +163,8 @@
     /**
      * 回复消息
      *
-     * @param  string  $type     消息类型，在类WechatResponse中定义
-     * @param  string  $params   消息参数，与消息类型相关：
+     * @param string $type   消息类型，在类WechatResponse中定义
+     * @param string $params 消息参数，与消息类型相关：
      *     WechatResponse::text  文本消息  $params为消息内容
      *         $params                        消息文本
      *     WechatResponse::news  图文消息  $params为数组
@@ -173,7 +176,8 @@
      *         $params['hqMusicUrl']
      * @return void
      */
-    public function sendResponse($type, $params) {
+    public function sendResponse($type, $params)
+    {
       if ($this->isValid()) {
         // 仅在请求有效时回复
         try {
@@ -209,21 +213,23 @@
      *
      * @return boolean
      */
-    public function isApiValidation() {
+    public function isApiValidation()
+    {
       return isset($_GET['echostr']);
     }
 
     /**
      * 验证此次请求的签名信息
      *
-     * @param  string $token 验证信息
+     * @param  string  $token 验证信息
      * @return boolean
      */
-    private function validateSignature($token) {
+    private function validateSignature($token)
+    {
       if ( ! (isset($_GET['signature']) && isset($_GET['timestamp']) && isset($_GET['nonce']))) {
         return FALSE;
       }
-      
+
       $signature = $_GET['signature'];
       $timestamp = $_GET['timestamp'];
       $nonce = $_GET['nonce'];
@@ -237,10 +243,11 @@
     /**
      * 以文本消息返回错误信息，并给引起异常的消息加星标
      *
-     * @param  string  $content  错误信息
+     * @param  string $content 错误信息
      * @return void
      */
-    protected function sendError($content) {
+    protected function sendError($content)
+    {
       if ($this->debug) {
         if ($content instanceof Exception) {
           $ex = $content;
@@ -263,8 +270,8 @@ ERR;
    * 微信公众平台传入消息类
    * 包含传入消息类型常量定义
    */
-  class WechatRequest {
-
+  class WechatRequest
+  {
     const text = 'text';
     const image = 'image';
     const location = 'location';
@@ -280,8 +287,8 @@ ERR;
    * 微信公众平台回复消息类抽象基类
    * 包含回复消息类型常量定义
    */
-  abstract class WechatResponse {
-
+  abstract class WechatResponse
+  {
     const text = 'text';
     const news = 'news';
     const music = 'music';
@@ -290,7 +297,8 @@ ERR;
     protected $fromUserName;
     protected $template;
 
-    public function __construct($toUserName, $fromUserName) {
+    public function __construct($toUserName, $fromUserName)
+    {
       $this->toUserName = $toUserName;
       $this->fromUserName = $fromUserName;
     }
@@ -302,11 +310,12 @@ ERR;
   /**
    * 用于回复的文本消息类型
    */
-  class WechatTextResponse extends WechatResponse {
-
+  class WechatTextResponse extends WechatResponse
+  {
     protected $content;
 
-    public function __construct($toUserName, $fromUserName, $content) {
+    public function __construct($toUserName, $fromUserName, $content)
+    {
       parent::__construct($toUserName, $fromUserName);
 
       $this->content = $content;
@@ -321,7 +330,8 @@ ERR;
 XML;
     }
 
-    public function __toString() {
+    public function __toString()
+    {
       return sprintf($this->template,
         $this->toUserName,
         $this->fromUserName,
@@ -335,14 +345,15 @@ XML;
   /**
    * 用于回复的音乐消息类型
    */
-  class WechatMusicResponse extends WechatResponse {
-
+  class WechatMusicResponse extends WechatResponse
+  {
     protected $title;
     protected $description;
     protected $musicUrl;
     protected $hqMusicUrl;
 
-    public function __construct($toUserName, $fromUserName, $title, $description, $musicUrl, $hqMusicUrl) {
+    public function __construct($toUserName, $fromUserName, $title, $description, $musicUrl, $hqMusicUrl)
+    {
       parent::__construct($toUserName, $fromUserName);
 
       $this->title = $title;
@@ -365,7 +376,8 @@ XML;
 XML;
     }
 
-    public function __toString() {
+    public function __toString()
+    {
       return sprintf($this->template,
         $this->toUserName,
         $this->fromUserName,
@@ -382,11 +394,12 @@ XML;
   /**
    * 用于回复的图文消息类型
    */
-  class WechatNewsResponse extends WechatResponse {
-
+  class WechatNewsResponse extends WechatResponse
+  {
     protected $items = array();
 
-    public function __construct($toUserName, $fromUserName, $items) {
+    public function __construct($toUserName, $fromUserName, $items)
+    {
       parent::__construct($toUserName, $fromUserName);
 
       $this->items = $items;
@@ -404,7 +417,8 @@ XML;
 XML;
     }
 
-    public function __toString() {
+    public function __toString()
+    {
       return sprintf($this->template,
         $this->toUserName,
         $this->fromUserName,
@@ -419,15 +433,16 @@ XML;
   /**
    * 单条图文消息类型
    */
-  class WechatNewsResponseItem {
-
+  class WechatNewsResponseItem
+  {
     protected $title;
     protected $description;
     protected $picUrl;
     protected $url;
     protected $template;
 
-    public function __construct($title, $description, $picUrl, $url) {
+    public function __construct($title, $description, $picUrl, $url)
+    {
       $this->title = $title;
       $this->description = $description;
       $this->picUrl = $picUrl;
@@ -442,7 +457,8 @@ XML;
 XML;
     }
 
-    public function __toString() {
+    public function __toString()
+    {
       return sprintf($this->template,
         $this->title,
         $this->description,

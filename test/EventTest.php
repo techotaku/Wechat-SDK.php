@@ -7,19 +7,21 @@
  * @link       https://github.com/techotaku/Wechat-SDK.php
  * @license    MIT License
  */
-  
+
   require_once __DIR__ . '/SdkTestBase.php';
 
   /**
    * Event Test
    */
-  class WechatSdkEventTest extends WechatSdkTestBase {
-
-    protected function setUp() {
+  class WechatSdkEventTest extends WechatSdkTestBase
+  {
+    protected function setUp()
+    {
       parent::setUp();
     }
 
-    public function testGeneralFields() {
+    public function testGeneralFields()
+    {
       $this->fillTextMsg('填充消息');
       $wechat = new Wechat($this->token);
       $this->expectOutputString('');
@@ -33,7 +35,8 @@
       $this->assertEquals($this->msgid, $wechat->getRequest('msgid'));
     }
 
-    public function testEventOnSubscribe() {
+    public function testEventOnSubscribe()
+    {
       $this->fillEvent('subscribe');
       $wechat = new Wechat($this->token);
       $this->expectOutputString('');
@@ -45,7 +48,8 @@
       $this->assertEquals('', $wechat->getRequest('eventkey'));
     }
 
-    public function testEventOnUnsubscribe() {
+    public function testEventOnUnsubscribe()
+    {
       $this->fillEvent('unsubscribe');
       $wechat = new Wechat($this->token);
       $this->expectOutputString('');
@@ -57,7 +61,8 @@
       $this->assertEquals('', $wechat->getRequest('eventkey'));
     }
 
-    public function testEventOnUnknown() {
+    public function testEventOnUnknown()
+    {
       $this->fillUnknown('unknown info');
       $wechat = new Wechat($this->token);
       $this->expectOutputString('');
@@ -69,7 +74,8 @@
       $this->assertEquals('unknown info', $wechat->getRequest('unknown'));
     }
 
-    public function testEventOnText() {
+    public function testEventOnText()
+    {
       $this->fillTextMsg('填充文本消息');
       $wechat = new Wechat($this->token);
       $this->expectOutputString('');
@@ -81,7 +87,8 @@
       $this->assertEquals('填充文本消息', $wechat->getRequest('content'));
     }
 
-    public function testEventOnImage() {
+    public function testEventOnImage()
+    {
       $this->fillImageMsg('https://travis-ci.org/techotaku/Wechat-SDK.php.png');
       $wechat = new Wechat($this->token);
       $this->expectOutputString('');
@@ -93,7 +100,8 @@
       $this->assertEquals('https://travis-ci.org/techotaku/Wechat-SDK.php.png', $wechat->getRequest('picurl'));
     }
 
-    public function testEventOnLocation() {
+    public function testEventOnLocation()
+    {
       $this->fillLocationMsg('23.134521', '113.358803');
       $wechat = new Wechat($this->token);
       $this->expectOutputString('');
@@ -107,7 +115,8 @@
       $this->assertEquals('113.358803', $wechat->getRequest('location_y'));
     }
 
-    public function testEventOnLink() {
+    public function testEventOnLink()
+    {
       $this->fillLinkMsg('techotaku/Wechat-SDK.php', '微信公众平台 PHP SDK', 'https://github.com/techotaku/Wechat-SDK.php');
       $wechat = new Wechat($this->token);
       $this->expectOutputString('');
@@ -123,4 +132,3 @@
     }
 
   }
-?>

@@ -7,19 +7,21 @@
  * @link       https://github.com/techotaku/Wechat-SDK.php
  * @license    MIT License
  */
-  
+
   require_once __DIR__ . '/SdkTestBase.php';
 
   /**
    * General Test
    */
-  class WechatSdkGeneralTest extends WechatSdkTestBase {
-
-    protected function setUp() {
+  class WechatSdkGeneralTest extends WechatSdkTestBase
+  {
+    protected function setUp()
+    {
       parent::setUp();
     }
 
-    public function testApiValidation() {
+    public function testApiValidation()
+    {
       $echostr = '9eabb7918cbad53305f7eae647cf1402e2fc7836';
       $_GET['echostr'] = $echostr;
       $this->expectOutputString($echostr);
@@ -28,7 +30,8 @@
       $this->assertTrue($wechat->isApiValidation());
     }
 
-    public function testBlankSignature() {
+    public function testBlankSignature()
+    {
       $_GET['signature'] = '';
       $this->expectOutputString('');
 
@@ -36,7 +39,8 @@
       $this->assertFalse($wechat->isValid());
     }
 
-    public function testEmptyPOST() {
+    public function testEmptyPOST()
+    {
       $this->expectOutputString('');
 
       $wechat = new Wechat($this->token);
@@ -44,4 +48,3 @@
     }
 
   }
-?>
